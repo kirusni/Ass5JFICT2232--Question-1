@@ -1,0 +1,52 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace AreaCalculator
+{
+    public partial class Form1 : Form
+    {
+        public Form1()
+        {
+            InitializeComponent();
+        }
+        private void btnCalcukate_Click(object sender, EventArgs e)
+        {
+            double radius;
+
+            // Validate empty input
+            if (string.IsNullOrWhiteSpace(txtRadius.Text))
+            {
+                MessageBox.Show("Please enter a value for the radius.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // Validate numeric input
+            if (!double.TryParse(txtRadius.Text, out radius))
+            {
+                MessageBox.Show("Only numeric values are allowed.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // Validate positive value
+            if (radius <= 0)
+            {
+                MessageBox.Show("Radius must be a positive number greater than zero.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // Perform calculation
+            double area = Math.PI * radius * radius;
+            lblResult.Text = "Area = " + area.ToString("F2");
+        }
+
+
+
+    }
+}
